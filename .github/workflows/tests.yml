@@ -9,23 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout project
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup JDK 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Make gradlew executable
+      - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Run UI tests
-        run: |
-          ./gradlew clean test \
-          -Dselenide.headless=true \
-          -Dchromeoptions.args="--no-sandbox,--disable-dev-shm-usage,--window-size=1920,1080"
+      - name: Run tests
+        run: ./gradlew clean test
