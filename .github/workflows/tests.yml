@@ -16,9 +16,10 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
-      - run: chmod +x gradlew
-
-      - run: ./gradlew clean test
+      - name: Run tests
+        run: ./gradlew clean test
